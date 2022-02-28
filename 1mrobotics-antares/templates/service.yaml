@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "1mrobotics-antares.fullname" . }}
+  labels:
+    {{- include "1mrobotics-antares.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "1mrobotics-antares.selectorLabels" . | nindent 4 }}
