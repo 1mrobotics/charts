@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: antares-cm
+  namespace: antares
+data:
+  lwms.url: "http://192.168.12.1:8082"
+  solaris.url: "https://solaris-api-integration.1mcontainers.appserviceenvironment.net"
+  kiosk.origin: "http://192.168.11.1:3000"
+  orchestrator.url: "http://192.168.12.1:8083"
+  control.url: "http://192.168.12.1:8084"
+  video.url: "http://192.168.12.1:8081"
+  postgresql.connection: "Host=localhost;Database=postgres;Username=postgres;Password=postgres"
+  postgresql.schema: "postgres"
+  asp.env: "production"
+  env.name: "int"
+  

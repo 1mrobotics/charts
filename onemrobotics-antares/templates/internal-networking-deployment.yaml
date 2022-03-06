@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.internalNetworking.name }}
+  labels:
+    {{- include "internal-networking.selectorLabels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "internal-networking.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "internal-networking.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.internalNetworking.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      volumes:
+        - name: local-share
+          persistentVolumeClaim:
+            claimName: local-share
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          volumeMounts:
+            - mountPath: /config
+              name: local-share
+              subPath: networking
+          securityContext:
+            {{- toYaml .Values.internalNetworking.securityContext | nindent 12 }}
+          image: "{{ .Values.internalNetworking.image.repository }}:{{ .Values.internalNetworking.image.tag }}"
+          imagePullPolicy: {{ .Values.controlapp.image.pullPolicy }}
