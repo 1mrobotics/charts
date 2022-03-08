@@ -11,7 +11,7 @@ antares:
     registry: 
     repository: 1mtest.azurecr.io/antares
     pullPolicy: IfNotPresent
-    tag: "5271c4742d6505b76d282ad877c5363d4eadadd3"
+    tag: "5271c4742d6505b76d282ad877c5363d4eadad3"
 
   imagePullSecrets:
     - name: azreg    
