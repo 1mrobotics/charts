@@ -1,0 +1,47 @@
+apiVersion: v1
+entries:
+  antares:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2022-03-08T12:02:22.604306376Z"
+    description: A Helm chart for Kubernetes
+    digest: bb22cecc05f50417522e9f0cbbc055ee4f8ebfd3cc2fdeedf7c209064878e146
+    name: antares
+    type: application
+    urls:
+    - https://github.com/1mrobotics/antares-chart/releases/download/antares-0.1.0/antares-0.1.0.tgz
+    version: 0.1.0
+  internalNetworking:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-03-08T12:02:22.830919375Z"
+    description: A Helm chart for Kubernetes
+    digest: 1e95c2888ef6286ef901a5999657cf6fc0767c759b9f8f902e0fd1ddd83a7a78
+    name: internalNetworking
+    type: application
+    urls:
+    - https://github.com/1mrobotics/antares-chart/releases/download/internalNetworking-0.1.0/internalNetworking-0.1.0.tgz
+    version: 0.1.0
+  kiosk:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-03-08T12:02:23.08825819Z"
+    description: A Helm chart for Kubernetes
+    digest: b4a3a54191e4ed97cdd2dbfdcefe23da17fc07baf458e0cce3fd3c5f0034cf95
+    name: kiosk
+    type: application
+    urls:
+    - https://github.com/1mrobotics/antares-chart/releases/download/kiosk-0.1.0/kiosk-0.1.0.tgz
+    version: 0.1.0
+  rtsp:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-03-08T12:02:23.319105829Z"
+    description: A Helm chart for Kubernetes
+    digest: 80e0ac182e2bf1a799d989cd7f5f4e7de00752a154554bcd2c7bf4b6596c2207
+    name: rtsp
+    type: application
+    urls:
+    - https://github.com/1mrobotics/antares-chart/releases/download/rtsp-0.1.0/rtsp-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-03-08T12:02:23.319115129Z"
