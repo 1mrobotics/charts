@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.videoapp.name }}
+  labels:
+    {{- include "video-app.selectorLabels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  strategy:
+    type: Recreate  
+  selector:
+    matchLabels:
+      {{- include "video-app.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "video-app.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.videoapp.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      hostNetwork: true
+      containers:
+        - name: {{ .Chart.Name }}
+          command: [ "dotnet" ]
+          args: [ "VideoApp.dll" ]
+          ports:
+            - containerPort: 8081
+              hostIP: 192.168.12.1
+              hostPort: 8081
+          securityContext:
+            {{- toYaml .Values.videoapp.securityContext | nindent 12 }}
+          image: "{{ .Values.videoapp.image.repository }}:{{ .Values.videoapp.image.tag }}"
+          imagePullPolicy: {{ .Values.controlapp.image.pullPolicy }}
+          env:
+            - name: ENVIRONMENT_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: antares-cm
+                  key: env.name
+            - name: ASPNETCORE_ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                  name: antares-cm
+                  key: asp.env
+            - name: ASPNETCORE_URLS
+              valueFrom:
+                configMapKeyRef:
+                  name: antares-cm
+                  key: video.url
+

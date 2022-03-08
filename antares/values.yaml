@@ -1,0 +1,112 @@
+# Default values for antares.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+namespace: antares
+
+antares:
+  image:
+    registry:
+    repository: 1mtest.azurecr.io/antares
+    pullPolicy: IfNotPresent
+    tag: "5271c4742d6505b76d282ad877c5363d4eadadd3"
+
+  imagePullSecrets:
+    - name: azreg
+  name: "orchestrator"
+  resources:
+    limits:
+      nvidia.com/gpu: 1 # requesting 1 GPU
+  securityContext:
+    privileged: true
+
+fixdns:
+  image:
+    registry:
+    repository: 1mtest.azurecr.io/dns_fixer
+    pullPolicy: IfNotPresent
+    tag: "latest"
+    
+    imagePullSecrets:
+      - name: azreg
+    nameOverride: "fix-dns"
+    fullnameOverride: ""
+
+controlapp:
+  image:
+    registry:
+    repository: 1mtest.azurecr.io/antares
+    pullPolicy: Always
+    tag: "5271c4742d6505b76d282ad877c5363d4eadadd3"
+
+  imagePullSecrets:
+    - name: azreg
+  name: "control-app"
+  securityContext:
+    privileged: true
+
+lwms:
+  image:
+    registry:
+    repository: 1mtest.azurecr.io/antares
+    pullPolicy: Always
+    tag: "5271c4742d6505b76d282ad877c5363d4eadadd3"
+
+  imagePullSecrets:
+    - name: azreg
+  name: "lwms"
+  securityContext:
+    privileged: true
+
+videoapp:
+  image:
+    registry:
+    repository: 1mtest.azurecr.io/antares
+    pullPolicy: Always
+    tag: "5271c4742d6505b76d282ad877c5363d4eadadd3"
+
+  imagePullSecrets:
+    - name: azreg
+  name: "video-app"
+  securityContext:
+    privileged: true
+
+podAnnotations: {}
+
+podSecurityContext: {}
+# fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+# runAsUser: 1000
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+#   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+#nodeSelector: {}
+#
+#tolerations: []
+#
+#affinity: {}

@@ -1,0 +1,119 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.antares.name }}
+  labels:
+    {{- include "orchestrator.selectorLabels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  strategy:
+    type: Recreate  
+  selector:
+    matchLabels:
+      {{- include "orchestrator.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "orchestrator.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.antares.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      hostNetwork: true
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      volumes:
+        - name: dev
+          hostPath:
+            path: /dev
+            type: Directory
+        - name: pcscd-comm
+          hostPath:
+            path: /run/pcscd
+            type: Directory
+        - name: cert
+          hostPath:
+            path: /home/onemrobotics/cert
+            type: DirectoryOrCreate
+      terminationGracePeriodSeconds: 61
+      initContainers:
+        - name: fix-dns
+          image: "{{ .Values.fixdns.image.repository }}:{{ .Values.fixdns.image.tag }}"
+      containers:
+        - name: {{ .Chart.Name }}
+          command: [ "dotnet" ]
+          args: [ "Orchestrator.dll" ]
+          securityContext:
+            {{- toYaml .Values.antares.securityContext | nindent 12 }}
+          image: "{{ .Values.antares.image.repository }}:{{ .Values.antares.image.tag }}"
+          volumeMounts:
+            - mountPath: /run/pcscd
+              name: pcscd-comm
+            - mountPath: /dev
+              name: dev
+            - mountPath: /cert
+              name: cert
+          ports:
+            - containerPort: 8083
+              hostIP: 192.168.12.1
+              hostPort: 8083
+            - containerPort: 3231
+              hostIP: 192.168.12.1
+              hostPort: 3231
+              protocol: UDP
+          imagePullPolicy: {{ .Values.antares.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.antares.resources | nindent 12 }}
+          env:
+            - name: LWMS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: antares-cm
+                  key: lwms.url
+            - name: SOLARIS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: antares-cm
+                  key: solaris.url
+            - name: EventHubsConnection
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: EventHubsConnection
+            - name: BlobStorageConnection
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: BlobStorageConnection
+            - name: CosmosDbConnection
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: CosmosDbConnection
+            - name: KIOSK_ORIGIN
+              valueFrom:
+                configMapKeyRef:
+                  name: antares-cm
+                  key: kiosk.origin
+            - name: ASPNETCORE_URLS
+              valueFrom:
+                configMapKeyRef:
+                  name: antares-cm
+                  key: orchestrator.url
+            - name: ENVIRONMENT_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: antares-cm
+                  key: env.name
+            - name: ASPNETCORE_ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                  name: antares-cm
+                  key: asp.env

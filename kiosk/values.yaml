@@ -1,0 +1,58 @@
+# Default values for kiosk.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+namespace: antares
+
+kiosk:
+  image:
+    registry:
+    repository: 1mtest.azurecr.io/antares-kiosk
+    pullPolicy: Always
+    tag: "dc2b2df9ad55b2bb84bbad0b17a8245f3e7a90e7"
+
+  imagePullSecrets:
+    - name: azreg
+  name: "kiosk"
+  securityContext:
+    privileged: true
+
+podAnnotations: {}
+
+podSecurityContext: {}
+# fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+# runAsUser: 1000
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+#   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+#nodeSelector: {}
+#
+#tolerations: []
+#
+#affinity: {}
