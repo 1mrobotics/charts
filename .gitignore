@@ -1,2 +1,4 @@
 .idea/
 .zshrc
+.DS_Store
+*.tgz
