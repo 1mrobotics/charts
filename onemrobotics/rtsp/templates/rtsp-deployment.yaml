@@ -57,8 +57,8 @@ spec:
               name: config
           securityContext:
             {{- toYaml .Values.rtsp.securityContext | nindent 12 }}
-          image: "{{ .Values.rtsp.image.repository }}:{{ .Values.antares.image.tag }}"
-          imagePullPolicy: {{ .Values.controlapp.image.pullPolicy }}
+          image: "{{ .Values.rtsp.image.repository }}:{{ .Values.rtsp.image.tag }}"
+          imagePullPolicy: {{ .Values.rtsp.image.pullPolicy }}
           env:
             - name: RTSP_API
               value: "yes"

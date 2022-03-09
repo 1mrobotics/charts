@@ -52,7 +52,7 @@ spec:
           securityContext:
             {{- toYaml .Values.kiosk.securityContext | nindent 12 }}
           image: "{{ .Values.kiosk.image.repository }}:{{ .Values.kiosk.image.tag }}"
-          imagePullPolicy: {{ .Values.controlapp.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.kiosk.image.pullPolicy }}
           env:
             - name: REACT_APP_API_URL
               value: http://192.168.11.1:8083
