@@ -11,6 +11,17 @@ entries:
     urls:
     - https://github.com/1mrobotics/charts/releases/download/antares-0.1.3/antares-0.1.3.tgz
     version: 0.1.3
+  internal-networking:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-03-09T15:55:22.800496702Z"
+    description: Internal networking Helm chart
+    digest: 78fd5514c8d21b3202be8eee3504b86948e51de0229a4eea6415fe175fa7d3de
+    name: internal-networking
+    type: application
+    urls:
+    - https://github.com/1mrobotics/charts/releases/download/internal-networking-0.1.4/internal-networking-0.1.4.tgz
+    version: 0.1.4
   internalNetworking:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -44,4 +55,4 @@ entries:
     urls:
     - https://github.com/1mrobotics/charts/releases/download/rtsp-0.1.3/rtsp-0.1.3.tgz
     version: 0.1.3
-generated: "2022-03-09T15:29:24.485960463Z"
+generated: "2022-03-09T15:55:22.800516103Z"
