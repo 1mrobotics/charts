@@ -3,6 +3,16 @@ entries:
   antares:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-03-09T18:36:20.252423133Z"
+    description: Antares Helm chart
+    digest: ea686c88fc6cc9b2bf3dbc6c3eee160be800ac420254d59d59c9f4afbf371099
+    name: antares
+    type: application
+    urls:
+    - https://github.com/1mrobotics/charts/releases/download/antares-0.1.4/antares-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-03-09T15:29:23.843590334Z"
     description: Antares Helm chart
     digest: 4ff658ac4ad407c7708e50137a28464c1766093f9eeaa6719c85fa19b541b89d
@@ -12,6 +22,16 @@ entries:
     - https://github.com/1mrobotics/charts/releases/download/antares-0.1.3/antares-0.1.3.tgz
     version: 0.1.3
   internal-networking:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-03-09T18:36:20.488316785Z"
+    description: Internal networking Helm chart
+    digest: c6888526745a9f39cc6ed7c9151dbaf0ae11640d11f2091749e29d621aeafb31
+    name: internal-networking
+    type: application
+    urls:
+    - https://github.com/1mrobotics/charts/releases/download/internal-networking-0.1.5/internal-networking-0.1.5.tgz
+    version: 0.1.5
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2022-03-09T15:55:22.800496702Z"
@@ -36,6 +56,16 @@ entries:
   kiosk:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-03-09T18:36:20.6981303Z"
+    description: Kiosk Helm chart
+    digest: cca6e2df194e82590913b55eb135c663a06a498511b32cda1b6165872a6799df
+    name: kiosk
+    type: application
+    urls:
+    - https://github.com/1mrobotics/charts/releases/download/kiosk-0.1.4/kiosk-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-03-09T15:29:24.280037098Z"
     description: Kiosk Helm chart
     digest: 57dc6c425d965ddb6add465fd0419f26272dbc6cd0192894b2333a2978d061df
@@ -47,6 +77,16 @@ entries:
   rtsp:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-03-09T18:36:20.921925804Z"
+    description: RTSP Helm chart
+    digest: 4094616dfc27b66d50d51181c9db9847dcd0b5005215d0e7e3c64de6ede6eeae
+    name: rtsp
+    type: application
+    urls:
+    - https://github.com/1mrobotics/charts/releases/download/rtsp-0.1.4/rtsp-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-03-09T15:29:24.485955163Z"
     description: RTSP Helm chart
     digest: 6da852b5c107fbb3b3d8cd7c812f80f5e3c0fce2d633ac9d959c7f44b2d80690
@@ -55,4 +95,4 @@ entries:
     urls:
     - https://github.com/1mrobotics/charts/releases/download/rtsp-0.1.3/rtsp-0.1.3.tgz
     version: 0.1.3
-generated: "2022-03-09T15:55:22.800516103Z"
+generated: "2022-03-09T18:36:20.921952904Z"
