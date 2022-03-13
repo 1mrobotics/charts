@@ -42,8 +42,8 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 
 {{- define "orchestrator.selectorLabels" -}}
 helm.sh/chart: {{ include "antares.chart" . }}
-app.kubernetes.io/name: {{ .Values.antares.name }}
-app.kubernetes.io/instance: {{ .Values.antares.name }}
+app.kubernetes.io/name: {{ .Values.orchestrator.name }}
+app.kubernetes.io/instance: {{ .Values.orchestrator.name }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
