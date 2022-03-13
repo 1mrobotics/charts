@@ -9,15 +9,33 @@ namespace: antares
 kiosk:
   image:
     registry:
-    repository: 1mtest.azurecr.io/antares-kiosk
+    repository: 1mstaging.azurecr.io/antares-kiosk
     pullPolicy: Always
-    tag: "dc2b2df9ad55b2bb84bbad0b17a8245f3e7a90e7"
+    tag: ""
 
   imagePullSecrets:
     - name: azreg
   name: "kiosk"
   securityContext:
     privileged: true
+    
+kioskLoader:
+  image:
+    registry:
+    repository: 1mstaging.azurecr.io/kiosk-loader
+    pullPolicy: IfNotPresent
+    tag: ""
+
+  imagePullSecrets:
+    - name: azreg
+  name: "kiosk-loader"
+  securityContext:
+    privileged: true
+
+parameters:
+  reactEntryMethod: "code"
+  reactLanguage: "en"
+  reactShippingCode: "false"
 
 podAnnotations: {}
 

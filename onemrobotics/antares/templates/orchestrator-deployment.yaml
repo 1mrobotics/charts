@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.antares.name }}
+  name: {{ .Values.orchestrator.name }}
   labels:
     {{- include "orchestrator.selectorLabels" . | nindent 4 }}
 spec:
@@ -22,7 +22,7 @@ spec:
       labels:
         {{- include "orchestrator.selectorLabels" . | nindent 8 }}
     spec:
-      {{- with .Values.antares.imagePullSecrets }}
+      {{- with .Values.orchestrator.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
@@ -46,13 +46,14 @@ spec:
       initContainers:
         - name: fix-dns
           image: "{{ .Values.fixdns.image.repository }}:{{ .Values.fixdns.image.tag }}"
+          imagePullPolicy: "{{ .Values.fixdns.image.pullPolicy }}"
       containers:
         - name: {{ .Chart.Name }}
           command: [ "dotnet" ]
           args: [ "Orchestrator.dll" ]
           securityContext:
-            {{- toYaml .Values.antares.securityContext | nindent 12 }}
-          image: "{{ .Values.antares.image.repository }}:{{ .Values.antares.image.tag }}"
+            {{- toYaml .Values.orchestrator.securityContext | nindent 12 }}
+          image: "{{ .Values.orchestrator.image.repository }}:{{ .Values.orchestrator.image.tag }}"
           volumeMounts:
             - mountPath: /run/pcscd
               name: pcscd-comm
@@ -68,9 +69,9 @@ spec:
               hostIP: 192.168.12.1
               hostPort: 3231
               protocol: UDP
-          imagePullPolicy: {{ .Values.antares.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.orchestrator.image.pullPolicy }}
           resources:
-            {{- toYaml .Values.antares.resources | nindent 12 }}
+            {{- toYaml .Values.orchestrator.resources | nindent 12 }}
           env:
             - name: LWMS_URL
               valueFrom:
@@ -82,21 +83,56 @@ spec:
                 configMapKeyRef:
                   name: antares-cm
                   key: solaris.url
-            - name: EventHubsConnection
+            - name: SECRET_EVENT_HUBS_CONNECTION
               valueFrom:
                 secretKeyRef:
                   name: key-vault-secret
                   key: EventHubsConnection
-            - name: BlobStorageConnection
+            - name: SECRET_BLOB_STORAGE_CONNECTION
               valueFrom:
                 secretKeyRef:
                   name: key-vault-secret
                   key: BlobStorageConnection
-            - name: CosmosDbConnection
+            - name: SECRET_COSMOS_DB_CONNECTION
               valueFrom:
                 secretKeyRef:
                   name: key-vault-secret
                   key: CosmosDbConnection
+            - name: AUTH0_DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: Auth0Domain
+            - name: SECRET_AUTH0_INTERNAL_API_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: Auth0InternalApiClientId
+            - name: SECRET_AUTH0_INTERNAL_API_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: Auth0InternalApiClientSecret
+            - name: AZURE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: AzureClientId
+            - name: AZURE_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: AzureClientSecret
+            - name: AZURE_SUBSCRIPTION_ID
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: AzureSubscriptionId
+            - name: AZURE_TENANT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: AzureTenantId
             - name: KIOSK_ORIGIN
               valueFrom:
                 configMapKeyRef:

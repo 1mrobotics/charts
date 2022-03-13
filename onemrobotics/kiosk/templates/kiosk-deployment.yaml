@@ -33,15 +33,37 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
+        - image: "{{ .Values.kiosk.image.repository }}:{{ .Values.kiosk.image.tag }}"
+          imagePullPolicy: "{{ .Values.kiosk.image.pullPolicy }}"
+          name: "{{ .Values.kiosk.name }}"
+          env:
+            - name: REACT_APP_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: kiosk-cm
+                  key: react.appUrl
+            - name: REACT_APP_ENTRY_METHOD
+              valueFrom:
+                configMapKeyRef:
+                  name: kiosk-cm
+                  key: react.entry.method
+            - name: REACT_APP_DEFAULT_LANGUAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: kiosk-cm
+                  key: react.default.language
+            - name: REACT_APP_SHIPPING_CODE
+              valueFrom:
+                configMapKeyRef:
+                  name: kiosk-cm
+                  key: react.shippingCode
           ports:
             - containerPort: 3000
               hostIP: 192.168.11.1
               hostPort: 3000
-            # NFS
-            - containerPort: 2049
-              hostIP: 192.168.11.1
-              hostPort: 22049
+        - image: "{{ .Values.kioskLoader.image.repository }}:{{ .Values.kioskLoader.image.tag }}"
+          imagePullPolicy: "{{ .Values.kioskLoader.image.pullPolicy }}"
+          name: "{{ .Values.kioskLoader.name }}"
           volumeMounts:
             - mountPath: /var/lib/docker
               name: local-share
@@ -49,22 +71,36 @@ spec:
             - mountPath: /networking
               name: local-share
               subPath: networking
-          securityContext:
-            {{- toYaml .Values.kiosk.securityContext | nindent 12 }}
-          image: "{{ .Values.kiosk.image.repository }}:{{ .Values.kiosk.image.tag }}"
-          imagePullPolicy: {{ .Values.kiosk.image.pullPolicy }}
           env:
-            - name: REACT_APP_API_URL
-              value: http://192.168.11.1:8083
-            - name: REACT_APP_CONTAINER_ID
-              value: '1'
             - name: DOCKER_IMAGE
-              value: 1mtest.azurecr.io/kiosk-os
+              valueFrom:
+                configMapKeyRef:
+                  name: kiosk-cm
+                  key: docker.image
             - name: DOCKER_USER
-              value: kiosk
+              valueFrom:
+                configMapKeyRef:
+                  name: kiosk-cm
+                  key: docker.user
             - name: DOCKER_PASSWORD
-              value: +uExAtKMj011H691pPB0mgVW5BtQY1Gg
+              valueFrom:
+                configMapKeyRef:
+                  name: kiosk-cm
+                  key: docker.password
             - name: SWITCH_MGMT_IP
-              value: 192.168.9.3
+              valueFrom:
+                configMapKeyRef:
+                  name: kiosk-cm
+                  key: switch.mgmt.ip
             - name: SWITCH_LOGIN_PASSWORD
-              value: 1MR0b0tics
+              valueFrom:
+                configMapKeyRef:
+                  name: kiosk-cm
+                  key: switch.login.password
+          securityContext:
+            privileged: true
+          ports:
+            # NFS
+            - containerPort: 2049
+              hostIP: 192.168.11.1
+              hostPort: 22049

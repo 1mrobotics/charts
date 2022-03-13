@@ -9,7 +9,7 @@ namespace: antares
 internalNetworking:
   image:
     registry:
-    repository: 1mtest.azurecr.io/internal-networking
+    repository: 1mstaging.azurecr.io/internal-networking
     pullPolicy: Always
     tag: "latest"
 

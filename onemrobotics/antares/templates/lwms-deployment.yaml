@@ -57,7 +57,7 @@ spec:
                 configMapKeyRef:
                   name: antares-cm
                   key: lwms.url
-            - name: PostgresqlConnection
+            - name: SECRET_POSTGRESQL_CONNECTION
               valueFrom:
                 configMapKeyRef:
                   name: antares-cm

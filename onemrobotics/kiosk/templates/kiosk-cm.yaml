@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kiosk-cm
+  namespace: antares
+data:
+  react.entry.method: "{{ .Values.parameters.reactEntryMethod }}"
+  react.default.language: "{{ .Values.parameters.reactLanguage }}"
+  react.shippingCode: "{{ .Values.parameters.reactShippingCode }}"
+  react.appUrl: "http://192.168.11.1:8083"
+  docker.image: "1mstaging.azurecr.io/kiosk-os"
+  docker.user: "kiosk"
+  docker.password: "+uExAtKMj011H691pPB0mgVW5BtQY1Gg"
+  switch.mgmt.ip: "192.168.11.3"
+  switch.login.password: "1MR0b0tics"
+    
+  

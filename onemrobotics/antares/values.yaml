@@ -6,12 +6,12 @@ replicaCount: 1
 
 namespace: antares
 
-antares:
+orchestrator:
   image:
     registry:
-    repository: 1mtest.azurecr.io/antares
-    pullPolicy: IfNotPresent
-    tag: "5271c4742d6505b76d282ad877c5363d4eadadd3"
+    repository: 1mstaging.azurecr.io/antares
+    pullPolicy: Always
+    tag: ""
 
   imagePullSecrets:
     - name: azreg
@@ -25,8 +25,8 @@ antares:
 fixdns:
   image:
     registry:
-    repository: 1mtest.azurecr.io/dns_fixer
-    pullPolicy: IfNotPresent
+    repository: 1mstaging.azurecr.io/dns_fixer
+    pullPolicy: Always
     tag: "latest"
     
     imagePullSecrets:
@@ -37,9 +37,9 @@ fixdns:
 controlapp:
   image:
     registry:
-    repository: 1mtest.azurecr.io/antares
+    repository: 1mstaging.azurecr.io/antares
     pullPolicy: Always
-    tag: "5271c4742d6505b76d282ad877c5363d4eadadd3"
+    tag: ""
 
   imagePullSecrets:
     - name: azreg
@@ -50,9 +50,9 @@ controlapp:
 lwms:
   image:
     registry:
-    repository: 1mtest.azurecr.io/antares
+    repository: 1mstaging.azurecr.io/antares
     pullPolicy: Always
-    tag: "5271c4742d6505b76d282ad877c5363d4eadadd3"
+    tag: ""
 
   imagePullSecrets:
     - name: azreg
@@ -63,15 +63,19 @@ lwms:
 videoapp:
   image:
     registry:
-    repository: 1mtest.azurecr.io/antares
+    repository: 1mstaging.azurecr.io/antares
     pullPolicy: Always
-    tag: "5271c4742d6505b76d282ad877c5363d4eadadd3"
+    tag: ""
 
   imagePullSecrets:
     - name: azreg
   name: "video-app"
   securityContext:
     privileged: true
+
+parameters:
+  solarisUrl: ""
+  env: ""
 
 podAnnotations: {}
 

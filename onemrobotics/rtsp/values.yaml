@@ -9,7 +9,7 @@ namespace: antares
 rtsp:
   image:
     registry:
-    repository: rtsp-simple-server
+    repository: 1mstaging.azurecr.io/rtsp-simple-server
     pullPolicy: Always
     tag: "ubuntu"
 
