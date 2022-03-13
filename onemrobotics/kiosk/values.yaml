@@ -23,7 +23,7 @@ kioskLoader:
   image:
     registry:
     repository: 1mstaging.azurecr.io/kiosk-loader
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
     tag: ""
 
   imagePullSecrets:
