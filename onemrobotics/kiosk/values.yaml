@@ -24,7 +24,7 @@ kioskLoader:
     registry:
     repository: 1mstaging.azurecr.io/kiosk-loader
     pullPolicy: Always
-    tag: ""
+    tag: "latest"
 
   imagePullSecrets:
     - name: azreg
