@@ -135,6 +135,16 @@ entries:
   kiosk:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-03-14T09:14:00.752155433Z"
+    description: Kiosk Helm chart
+    digest: 27bae128356c2a67a25130a51c17441820fbe2f415b78055b7be0fe378fea124
+    name: kiosk
+    type: application
+    urls:
+    - https://github.com/1mrobotics/charts/releases/download/kiosk-0.1.15/kiosk-0.1.15.tgz
+    version: 0.1.15
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-03-13T10:36:30.998964315Z"
     description: Kiosk Helm chart
     digest: 10578d6d999003cf4a527cbc35ec316c525eedb6a0aa7985e6fb88d3b12bb784
@@ -274,4 +284,4 @@ entries:
     urls:
     - https://github.com/1mrobotics/charts/releases/download/rtsp-0.1.3/rtsp-0.1.3.tgz
     version: 0.1.3
-generated: "2022-03-13T12:14:31.698734988Z"
+generated: "2022-03-14T09:14:00.752256438Z"
