@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: snmp-mibs-cm
+data:
+  {{- $files := .Files }}
+  {{- range tuple "mibs/hikvision-device-smi.txt" "mibs/ups.txt" }}
+  {{ trimPrefix "mibs/" . }}: |-
+        {{ $files.Get . }}
+  {{- end }}

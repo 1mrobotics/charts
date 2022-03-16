@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: snmp-exporter-deployment
+  labels:
+    app: snmp-exporter
+spec:
+  selector:
+    matchLabels:
+      app: snmp-exporter
+  template:
+    metadata:
+      labels:
+        app: snmp-exporter
+    spec:
+      initContainers:
+      - name: snmp-generator
+        image: prom/snmp-generator
+        imagePullPolicy: Always
+        volumeMounts:
+          - name: snmp-generator-volume
+            mountPath: /opts
+          - name: snmp-mibs-volume
+            mountPath: /opts/mibs
+      containers:
+      - name: snmp-exporter
+        image: prom/snmp-exporter
+        command: ["--config.file=/opts/snmp.yml"]
+        volumeMounts:
+           - name: snmp-generator-volume
+             mountPath: /opts
+        ports:
+          - 9116:9116
+          - 116:116/udp
+      volumes:
+        - name: snmp-generator-volume
+          configMap:
+            name: snmp-generator-cm
+        - name: snmp-mibs-volume
+          configMap:
+            name: snmp-mibs-cm

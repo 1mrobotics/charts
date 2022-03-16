@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: snmp-generator-cm
+data:
+  {{- $files := .Files }}
+  {{- range tuple "snmp-generator/generator.yaml" }}
+  {{ trimPrefix "snmp-generator/" . }}: |-
+        {{ $files.Get . }}
+  {{- end }}
+
