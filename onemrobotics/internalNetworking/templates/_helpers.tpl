@@ -14,7 +14,7 @@ If release name contains chart name it will be used as a full name.
 {{- if .Values.internalNetworking.name }}
 {{- .Values.internalNetworking.name | trunc 63 | trimSuffix "-" }}
 {{- else }}
-{{- $name := default .Chart.Name .Values.nameOverride }}
+{{- $name := default .Chart.Name .Values.internalNetworking.name }}
 {{- if contains $name .Release.Name }}
 {{- .Release.Name | trunc 63 | trimSuffix "-" }}
 {{- else }}
