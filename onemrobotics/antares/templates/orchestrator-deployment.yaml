@@ -34,10 +34,6 @@ spec:
           hostPath:
             path: /dev
             type: Directory
-        - name: pcscd-comm
-          hostPath:
-            path: /run/pcscd
-            type: Directory
         - name: cert
           hostPath:
             path: /home/onemrobotics/cert
@@ -55,8 +51,6 @@ spec:
             {{- toYaml .Values.orchestrator.securityContext | nindent 12 }}
           image: "{{ .Values.orchestrator.image.repository }}:{{ .Values.orchestrator.image.tag }}"
           volumeMounts:
-            - mountPath: /run/pcscd
-              name: pcscd-comm
             - mountPath: /dev
               name: dev
             - mountPath: /cert
