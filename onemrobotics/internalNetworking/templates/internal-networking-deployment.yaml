@@ -39,6 +39,7 @@ spec:
               name: local-share
               subPath: networking
           securityContext:
-            {{- toYaml .Values.internalNetworking.securityContext | nindent 12 }}
+            capabilities:
+              add: ["NET_ADMIN"]
           image: "{{ .Values.internalNetworking.image.repository }}:{{ .Values.internalNetworking.image.tag }}"
           imagePullPolicy: {{ .Values.internalNetworking.image.pullPolicy }}
