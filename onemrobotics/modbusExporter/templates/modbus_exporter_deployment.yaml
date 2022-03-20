@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/modbus-cm.yaml") . | sha256sum }}
+  name: {{ include "modbusExporter.fullname" . }}
+  labels:
+    {{- include "modbusExporter.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "modbusExporter.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "modbusExporter.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: modbusExporter
+          image: alpine
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: modbus-config-volume
+              mountPath: /home
+          ports:
+            - name: modbus
+              containerPort: 9602
+              protocol: TCP
+          command:
+            - /home/entry-point.sh
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | indent 8 }}
+      {{- end }}
+      hostNetwork: true
+      volumes:
+        - name: modbus-config-volume
+          configMap:
+            name: modbus-cm

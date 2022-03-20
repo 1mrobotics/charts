@@ -1,0 +1,6 @@
+imagePullSecrets:
+  - name: azreg
+
+replicaCount: 1
+
+podAnnotations: {}
