@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chronyd
+spec:
+  selector:
+    matchLabels:
+      app: chronyd
+  template:
+    metadata:
+      labels:
+        app: chronyd
+    spec:
+      hostNetwork: true
+      containers:
+      - name: chronyd
+        image: geoffh1977/chrony
+        volumeMounts:          
+          - name: chrony-config-volume
+            mountPath: /home
+          
+        env:
+        - name: ALLOW_CIDR
+          value: 0.0.0.0/0
+        ports:
+        - name: ntp
+          containerPort: 123
+          protocol: UDP
+        command: [ "/usr/sbin/chronyd", "-d", "-f", "/home/chrony.conf" ]
+        securityContext:
+          capabilities:
+            add: ["SYS_TIME"]
+      volumes:
+      - name: chrony-config-volume
+        configMap:
+          name: chrony-config-cm  

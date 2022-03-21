@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: chrony-config-cm
+data:
+  chrony.conf: |
+  {{ .Files.Get "chrony/chrony.conf" | nindent 4 }}
