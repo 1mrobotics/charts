@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/modbus-cm.yaml") . | sha256sum }}
+  name: modbus
+  labels:
+    app: modbus
+spec:
+  selector:
+    matchLabels:
+      app: modbus
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        app: modbus
+    spec:
+      containers:
+        - name: modbus
+          image: golang:alpine
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: modbus-config-volume
+              mountPath: /home
+          ports:
+            - name: modbus
+              containerPort: 9602
+              protocol: TCP
+          command: ["sh", "/home/entry-point.sh"]
+      {{ include "prometheusExporters.imagePullSecrets" .  | indent 6 }}
+      hostNetwork: true
+      volumes:
+        - name: modbus-config-volume
+          configMap:
+            name: modbus-cm

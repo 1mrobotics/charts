@@ -1,0 +1,7 @@
+modules:
+  HIK-DEVICE-MIB:
+    walk:
+      - devicemib
+  UPS-DEVICE-MIB:
+    walk:
+      - upsBattery
