@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: snmp-generator-cm
+data:
+  generator.yml: |
+  {{ .Files.Get "snmp-generator/generator.yml" | nindent 4}}

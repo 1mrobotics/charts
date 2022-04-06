@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: snmp-exporter-deployment
+  labels:
+    app: snmp-exporter
+spec:
+  selector:
+    matchLabels:
+      app: snmp-exporter
+  template:
+    metadata:
+      labels:
+        app: snmp-exporter
+    spec:
+      initContainers:
+      - name: snmp-generator
+        image: prom/snmp-generator
+        imagePullPolicy: Always
+        command: [ "sh", "-c", " mkdir -p /etc/snmp_exporter && generator generate --output-path /etc/snmp_exporter/snmp.yml" ]
+        env:
+          - name: MIBDIRS
+            value: /opt/mibs
+        volumeMounts:
+          - name: snmp-generator-volume
+            mountPath: /opt
+          - name: snmp-mibs-volume
+            mountPath: /opt/mibs
+      containers:
+      - name: snmp-exporter
+        image: prom/snmp-exporter
+        ports:
+        - name: modbus
+          containerPort: 9116
+          protocol: TCP
+      {{ include "prometheusExporters.imagePullSecrets" . | indent 6 }}
+      volumes:
+        - name: snmp-generator-volume
+          configMap:
+            name: snmp-generator-cm
+        - name: snmp-mibs-volume
+          configMap:
+            name: snmp-mibs-cm     
