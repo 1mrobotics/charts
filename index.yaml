@@ -124,6 +124,16 @@ entries:
   cameras:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-04-07T13:40:08.16180427Z"
+    description: Cameras Helm chart
+    digest: 43fe593a7d0ac31b03c4790f59e0e457e3b61d8d4ed46ed2379a59963c83f3fa
+    name: cameras
+    type: application
+    urls:
+    - https://github.com/1mrobotics/charts/releases/download/cameras-0.1.15/cameras-0.1.15.tgz
+    version: 0.1.15
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-04-07T11:58:00.216627835Z"
     description: Cameras Helm chart
     digest: b124f3a937c8fbad54b58aeae403369a2639237b5258754969f78ed5b8356086
@@ -416,4 +426,4 @@ entries:
     urls:
     - https://github.com/1mrobotics/charts/releases/download/rtsp-0.1.3/rtsp-0.1.3.tgz
     version: 0.1.3
-generated: "2022-04-07T11:58:00.407658069Z"
+generated: "2022-04-07T13:40:08.162029268Z"
