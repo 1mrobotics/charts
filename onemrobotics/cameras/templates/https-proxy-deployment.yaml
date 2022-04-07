@@ -36,16 +36,6 @@ spec:
             type: DirectoryOrCreate
       containers:
         - name: {{ .Values.httpsProxy.name }}
-          ports:
-            - containerPort: 9997
-              hostIP: 192.168.12.1
-              hostPort: 9997
-            - containerPort: 8554
-              hostIP: 192.168.12.1
-              hostPort: 8554
-            - containerPort: 8888
-              hostIP: 192.168.12.1
-              hostPort: 8888
           volumeMounts:
             - mountPath: /etc/letsencrypt
               name: letsencrypt
