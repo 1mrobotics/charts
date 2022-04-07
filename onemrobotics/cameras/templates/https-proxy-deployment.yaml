@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.httpsProxy.name }}
+  labels:
+    {{- include "httpsProxy.selectorLabels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  strategy:
+    type: Recreate  
+  selector:
+    matchLabels:
+      {{- include "httpsProxy.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "httpsProxy.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.httpsProxy.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      hostNetwork: true
+      volumes:
+        - name: letsencrypt
+          hostPath:
+            path: /etc/letsencrypt
+            type: DirectoryOrCreate
+      containers:
+        - name: {{ .Values.httpsProxy.name }}
+          ports:
+            - containerPort: 9997
+              hostIP: 192.168.12.1
+              hostPort: 9997
+            - containerPort: 8554
+              hostIP: 192.168.12.1
+              hostPort: 8554
+            - containerPort: 8888
+              hostIP: 192.168.12.1
+              hostPort: 8888
+          volumeMounts:
+            - mountPath: /etc/letsencrypt
+              name: letsencrypt
+          securityContext:
+            {{- toYaml .Values.httpsProxy.securityContext | nindent 12 }}
+          image: "{{ .Values.httpsProxy.image.repository }}:{{ .Values.httpsProxy.image.tag }}"
+          imagePullPolicy: {{ .Values.httpsProxy.image.pullPolicy }}
+          env:
+            - name: CERTBOT_EMAIL
+              value: "1m-devops@1mrobotics.com"
+            - name: CERTBOT_AUTHENTICATOR
+              value: "dns-cloudflare"
+
