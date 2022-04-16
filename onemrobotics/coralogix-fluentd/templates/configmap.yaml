@@ -281,7 +281,7 @@ data:
       body_size_limit 32m
       keepalive_timeout 10s
     </source>
-    <filter react.**>
+    <filter kiosk.**>
       @type record_transformer
       <record>
         tag ${tag}
