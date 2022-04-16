@@ -124,6 +124,16 @@ entries:
   cameras:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-04-16T18:29:32.966688967Z"
+    description: Cameras Helm chart
+    digest: 1d72da0e39fd1f4f82db417dee752cba640a6dff8676cb51e24cb83ac507c742
+    name: cameras
+    type: application
+    urls:
+    - https://github.com/1mrobotics/charts/releases/download/cameras-0.1.16/cameras-0.1.16.tgz
+    version: 0.1.16
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-04-07T13:40:08.16180427Z"
     description: Cameras Helm chart
     digest: 43fe593a7d0ac31b03c4790f59e0e457e3b61d8d4ed46ed2379a59963c83f3fa
@@ -142,6 +152,29 @@ entries:
     urls:
     - https://github.com/1mrobotics/charts/releases/download/cameras-0.1.14/cameras-0.1.14.tgz
     version: 0.1.14
+  coralogix-fluentd:
+  - apiVersion: v1
+    appVersion: 1.1.8
+    created: "2022-04-16T18:29:33.133867462Z"
+    description: Modificated version of official FluentD image with support of integration
+      with Coralogix service.
+    digest: f1f64054e983a8c6985544b18c7a7158dade2d46acbb742162b5330409ae0fd6
+    home: https://coralogix.com/
+    icon: https://coralogix.com/wp-content/uploads/2016/12/logos_yjmwij-2.png
+    keywords:
+    - FluentD
+    - logging
+    - Coralogix
+    maintainers:
+    - email: eldar@coralogix.com
+      name: Eldar Aliiev
+      url: https://github.com/EldarAliiev
+    name: coralogix-fluentd
+    sources:
+    - https://github.com/coralogix/fluentd-coralogix-image/examples/helm
+    urls:
+    - https://github.com/1mrobotics/charts/releases/download/coralogix-fluentd-1.0.5/coralogix-fluentd-1.0.5.tgz
+    version: 1.0.5
   internal-networking:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -426,4 +459,4 @@ entries:
     urls:
     - https://github.com/1mrobotics/charts/releases/download/rtsp-0.1.3/rtsp-0.1.3.tgz
     version: 0.1.3
-generated: "2022-04-07T13:40:08.162029268Z"
+generated: "2022-04-16T18:29:33.133971563Z"
