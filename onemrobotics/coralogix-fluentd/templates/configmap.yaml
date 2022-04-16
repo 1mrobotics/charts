@@ -14,49 +14,6 @@ data:
     @include conf/*.conf
   kubernetes.conf: |
     <source>
-      @type http
-      port 9880
-      bind 0.0.0.0
-      body_size_limit 32m
-      keepalive_timeout 10s
-    </source>
-    <filter react.**>
-      @type record_transformer
-      <record>
-        tag ${tag}
-      </record>
-    </filter>
-    <filter react.**>
-      @type record_transformer
-      @log_level warn
-      enable_ruby true
-      auto_typecast true
-      renew_record true
-      <record>
-        applicationName "abs"
-        subsystemName ${tag}
-        timestamp ${time.strftime('%s%L')} # Optional
-        text ${record.to_json}
-      </record>
-    </filter>
-    <match react.**>
-      @type http
-      @id out_http_coralogix
-      endpoint "https://api.coralogix.us/logs/rest/singles"
-      headers {"private_key":"#{ENV['PRIVATE_KEY']}"}
-      error_response_as_unrecoverable false
-      <buffer tag>
-        @type memory
-        chunk_limit_size 10MB
-        compress gzip
-        flush_interval 1s
-        overflow_action block
-        retry_max_times 5
-        retry_type periodic
-        retry_wait 2
-      </buffer>
-    </match>
-    <source>
       @id minion
       @type tail
       @label @KUBERNETES_CLUSTER_COMPONENTS
@@ -316,3 +273,47 @@ data:
         {{- end }}
       </match>
     </label>
+  04_http.conf: |
+    <source>
+      @type http
+      port 9880
+      bind 0.0.0.0
+      body_size_limit 32m
+      keepalive_timeout 10s
+    </source>
+    <filter react.**>
+      @type record_transformer
+      <record>
+        tag ${tag}
+      </record>
+    </filter>
+    <filter react.**>
+      @type record_transformer
+      @log_level warn
+      enable_ruby true
+      auto_typecast true
+      renew_record true
+      <record>
+        applicationName "#{ENV['APP_NAME']}"
+        subsystemName ${tag}
+        timestamp ${time.strftime('%s%L')} # Optional
+        text ${record.to_json}
+      </record>
+    </filter>
+    <match kiosk.**>
+      @type http
+      @id out_http_coralogix
+      endpoint "https://api.coralogix.us/logs/rest/singles"
+      headers {"private_key":"#{ENV['PRIVATE_KEY']}"}
+      error_response_as_unrecoverable false
+      <buffer tag>
+        @type memory
+        chunk_limit_size 10MB
+        compress gzip
+        flush_interval 1s
+        overflow_action block
+        retry_max_times 5
+        retry_type periodic
+        retry_wait 2
+      </buffer>
+    </match>
