@@ -60,6 +60,9 @@ spec:
         - name: fluentd-config
           mountPath: /fluentd/etc/conf/kubernetes.conf
           subPath: kubernetes.conf
+        - name: fluentd-config
+          mountPath: /fluentd/etc/conf/04_http.conf
+          subPath: 04_http.conf
       terminationGracePeriodSeconds: 30
       volumes:
       - name: varlog
