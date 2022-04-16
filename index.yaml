@@ -265,10 +265,10 @@ entries:
     version: 1.0.5
   - apiVersion: v1
     appVersion: 1.1.8
-    created: "2022-04-16T21:22:03.560798139Z"
+    created: "2022-04-16T21:22:45.292380655Z"
     description: Modificated version of official FluentD image with support of integration
       with Coralogix service.
-    digest: 85bce1ead2a689c91ced015ab989d31c78cfe5e8f8c1daeeac7ae1a73d1cb90f
+    digest: ac085093b57532b1028e9b6ef09ee11f25c0f8a5bda346594733cf0c355a0978
     home: https://coralogix.com/
     icon: https://coralogix.com/wp-content/uploads/2016/12/logos_yjmwij-2.png
     keywords:
@@ -283,8 +283,8 @@ entries:
     sources:
     - https://github.com/coralogix/fluentd-coralogix-image/examples/helm
     urls:
-    - https://github.com/1mrobotics/charts/releases/download/coralogix-fluentd-1.0.1/coralogix-fluentd-1.0.1.tgz
-    version: 1.0.1
+    - https://github.com/1mrobotics/charts/releases/download/coralogix-fluentd-1.0.2/coralogix-fluentd-1.0.2.tgz
+    version: 1.0.2
   internal-networking:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -569,4 +569,4 @@ entries:
     urls:
     - https://github.com/1mrobotics/charts/releases/download/rtsp-0.1.3/rtsp-0.1.3.tgz
     version: 0.1.3
-generated: "2022-04-16T21:22:03.560941838Z"
+generated: "2022-04-16T21:22:45.292572758Z"
