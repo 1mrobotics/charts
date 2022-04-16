@@ -304,7 +304,7 @@ data:
       @type http
       @id out_http_coralogix
       endpoint "https://api.coralogix.us/logs/rest/singles"
-      headers {"private_key":"109a4e45-0761-f47e-5dcc-2522605f44bf"}
+      headers {"private_key":"#{ENV['PRIVATE_KEY']}"}
       error_response_as_unrecoverable false
       <buffer tag>
         @type memory
