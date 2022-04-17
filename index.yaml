@@ -508,6 +508,27 @@ entries:
   fluentd-http:
   - apiVersion: v2
     appVersion: v1.12.0
+    created: "2022-04-17T15:58:39.815298823Z"
+    dependencies:
+    - name: fluentd
+      repository: https://fluent.github.io/helm-charts
+      tags:
+      - fluentd with http output plugin
+      version: 0.3.1
+    description: Fluentd Chart with HTTP output plugin
+    digest: 9b93130e49f9449e7b6934d40f8a5322c8e36cba289e3438b2e78a78bc892d98
+    keywords:
+    - Fluentd
+    - HTTP output plugin
+    maintainers:
+    - email: support@coralogix.com
+      name: support
+    name: fluentd-http
+    urls:
+    - https://github.com/1mrobotics/charts/releases/download/fluentd-http-0.0.2/fluentd-http-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
+    appVersion: v1.12.0
     created: "2022-04-17T15:01:50.27948848Z"
     dependencies:
     - name: fluentd
@@ -811,4 +832,4 @@ entries:
     urls:
     - https://github.com/1mrobotics/charts/releases/download/rtsp-0.1.3/rtsp-0.1.3.tgz
     version: 0.1.3
-generated: "2022-04-17T15:01:50.27971398Z"
+generated: "2022-04-17T15:58:39.815463926Z"
