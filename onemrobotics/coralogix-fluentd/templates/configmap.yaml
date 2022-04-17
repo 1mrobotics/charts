@@ -301,10 +301,10 @@ data:
       </record>
     </filter>
     <match kiosk.**>
-      @type coralogix
+      @type http
+      @id out_http_coralogix
+      endpoint "https://api.coralogix.us/logs/rest/singles"
       privatekey "#{ENV['PRIVATE_KEY']}"
-      appname "#{ENV['APP_NAME']}"
-      subsystemname "#{ENV['SUB_SYSTEM']}"
       error_response_as_unrecoverable false
       <buffer tag>
         @type memory
