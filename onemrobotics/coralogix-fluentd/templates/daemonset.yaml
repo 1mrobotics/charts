@@ -21,6 +21,7 @@ spec:
         k8s-app-version: {{ .Chart.AppVersion }}
         kubernetes.io/cluster-service: "true"
     spec:
+      hostNetwork: true
       containers:
       - name: fluentd-coralogix
         image: {{ .Values.container.image.repository }}:{{ .Values.container.image.tag }}
