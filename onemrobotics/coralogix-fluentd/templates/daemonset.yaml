@@ -41,7 +41,7 @@ spec:
           name: graylog
         env:
         - name: CORALOGIX_LOG_URL
-          value: https://{{ .Values.ENDPOINT }}/api/v1/logs
+          value: http://192.168.12.1:4488/
         - name: CORALOGIX_TIME_DELTA_URL
           value: https://{{ .Values.ENDPOINT }}/sdk/v1/time
         envFrom:
