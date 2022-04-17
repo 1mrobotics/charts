@@ -20,16 +20,16 @@ coralogix:
 ## Pod settings
 container:
   image:
-    repository: docker.io/coralogixrepo/fluentd-coralogix-image
-    tag: 1.1.8
+    repository: coralogixrepo/coralogix-fluentd-multiarch
+    tag: v0.0.1
     pullPolicy: Always
-  resources:
-    limits:
-      cpu: 100m
-      memory: 400Mi
-    requests:
-      cpu: 100m
-      memory: 400Mi
+    resources:
+      requests:
+        cpu: 800m
+        memory: 900Mi
+      limits:
+        cpu: 800m
+        memory: 900Mi
 
 ## Security settings
 rbac:
