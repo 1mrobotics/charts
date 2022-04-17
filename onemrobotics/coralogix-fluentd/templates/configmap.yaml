@@ -274,6 +274,13 @@ data:
       </match>
     </label>
   04_http.conf: |
+    <source>
+      @type http
+      port 9880
+      bind 0.0.0.0
+      body_size_limit 32m
+      keepalive_timeout 10s
+    </source>
     <filter kiosk.**> 
       @type record_transformer
       @log_level warn
