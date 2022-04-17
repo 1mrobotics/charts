@@ -14,4 +14,4 @@ maintainers:
 name: coralogix-fluentd
 sources:
 - https://github.com/coralogix/fluentd-coralogix-image/examples/helm
-version: 1.0.13
+version: 1.0.14
