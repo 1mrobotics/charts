@@ -265,6 +265,28 @@ entries:
     version: 1.0.5
   - apiVersion: v1
     appVersion: 1.1.8
+    created: "2022-04-17T07:52:08.38603818Z"
+    description: Modificated version of official FluentD image with support of integration
+      with Coralogix service.
+    digest: 941956ba5a3b0ec782f8bd655fe30d26e74ce0642ef1114608f2069cd6b457fc
+    home: https://coralogix.com/
+    icon: https://coralogix.com/wp-content/uploads/2016/12/logos_yjmwij-2.png
+    keywords:
+    - FluentD
+    - logging
+    - Coralogix
+    maintainers:
+    - email: eldar@coralogix.com
+      name: Eldar Aliiev
+      url: https://github.com/EldarAliiev
+    name: coralogix-fluentd
+    sources:
+    - https://github.com/coralogix/fluentd-coralogix-image/examples/helm
+    urls:
+    - https://github.com/1mrobotics/charts/releases/download/coralogix-fluentd-1.0.4/coralogix-fluentd-1.0.4.tgz
+    version: 1.0.4
+  - apiVersion: v1
+    appVersion: 1.1.8
     created: "2022-04-17T07:17:21.309318092Z"
     description: Modificated version of official FluentD image with support of integration
       with Coralogix service.
@@ -591,4 +613,4 @@ entries:
     urls:
     - https://github.com/1mrobotics/charts/releases/download/rtsp-0.1.3/rtsp-0.1.3.tgz
     version: 0.1.3
-generated: "2022-04-17T07:17:21.309486294Z"
+generated: "2022-04-17T07:52:08.386312285Z"
