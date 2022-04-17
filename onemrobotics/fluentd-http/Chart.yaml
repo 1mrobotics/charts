@@ -1,0 +1,17 @@
+apiVersion: v2
+appVersion: v1.12.0
+dependencies:
+- name: fluentd
+  repository: https://fluent.github.io/helm-charts
+  tags:
+  - fluentd with http output plugin
+  version: 0.3.1
+description: Fluentd Chart with HTTP output plugin
+keywords:
+- Fluentd
+- HTTP output plugin
+maintainers:
+- email: support@coralogix.com
+  name: support
+name: fluentd-http
+version: 0.0.1
