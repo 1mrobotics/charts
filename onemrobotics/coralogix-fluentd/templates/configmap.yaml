@@ -301,7 +301,7 @@ data:
     <match kiosk.**>
       @type http
       @id out_http_coralogix
-      endpoint "http://192.168.12.1:9988"
+      endpoint "https://#{ENV['ENDPOINT'] || 'api.coralogix.com'}/logs/rest/singles"
       headers_from_placeholders {"private_key":"${$.privateKey}"}
       error_response_as_unrecoverable false
       <buffer $.privateKey>
