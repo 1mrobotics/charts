@@ -283,30 +283,26 @@ data:
     </source>
     <filter kiosk.**>
       @type record_transformer
-      <record>
-        tag ${tag}
-      </record>
-    </filter>
-    <filter kiosk.**>
-      @type record_transformer
       @log_level warn
       enable_ruby true
       auto_typecast true
       renew_record true
       <record>
+        privateKey "#{ENV['PRIVATE_KEY']}"
         applicationName "#{ENV['APP_NAME']}"
-        subsystemName ${tag}
-        timestamp ${time.strftime('%s%L')} # Optional
+        subsystemName "kiosk"
+        computerName ${record.dig("kubernetes", "host")}
+        timestamp ${time.strftime('%s%L')}
         text ${record.to_json}
       </record>
     </filter>
     <match kiosk.**>
       @type http
       @id out_http_coralogix
-      endpoint "https://api.coralogix.us/logs/rest/singles"
-      privatekey "#{ENV['PRIVATE_KEY']}"
+      endpoint "https://#{ENV['ENDPOINT'] || 'api.coralogix.com'}/logs/rest/singles"
+      headers_from_placeholders {"private_key":"${$.privateKey}"}
       error_response_as_unrecoverable false
-      <buffer tag>
+      <buffer $.privateKey>
         @type memory
         chunk_limit_size 10MB
         compress gzip
