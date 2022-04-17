@@ -274,14 +274,7 @@ data:
       </match>
     </label>
   04_http.conf: |
-    <source>
-      @type http
-      port 9880
-      bind 0.0.0.0
-      body_size_limit 32m
-      keepalive_timeout 10s
-    </source>
-    <filter kiosk.**>
+    <filter kiosk.**> 
       @type record_transformer
       @log_level warn
       enable_ruby true
@@ -290,7 +283,7 @@ data:
       <record>
         privateKey "#{ENV['PRIVATE_KEY']}"
         applicationName "#{ENV['APP_NAME']}"
-        subsystemName "kiosk"
+        subsystemName ${record.dig("kubernetes", "container_name")}
         computerName ${record.dig("kubernetes", "host")}
         timestamp ${time.strftime('%s%L')}
         text ${record.to_json}
@@ -299,7 +292,7 @@ data:
     <match kiosk.**>
       @type http
       @id out_http_coralogix
-      endpoint "https://#{ENV['ENDPOINT'] || 'api.coralogix.us'}/logs/rest/singles"
+      endpoint "https://#{ENV['ENDPOINT'] || 'api.coralogix.com'}/logs/rest/singles"
       headers_from_placeholders {"private_key":"${$.privateKey}"}
       error_response_as_unrecoverable false
       <buffer $.privateKey>
