@@ -38,11 +38,24 @@ spec:
           hostPath:
             path: /cert
             type: DirectoryOrCreate
+        - name: config
+          emptyDir: {}
       terminationGracePeriodSeconds: 61
       initContainers:
         - name: fix-dns
           image: "{{ .Values.fixdns.image.repository }}:{{ .Values.fixdns.image.tag }}"
           imagePullPolicy: "{{ .Values.fixdns.image.pullPolicy }}"
+        - name: config-loader
+          image: "{{ .Values.config-loader.image.repository }}:{{ .Values.config-loader.image.tag }}"
+          imagePullPolicy: "{{ .Values.config-loader.image.pullPolicy }}"
+          volumeMounts:
+          - mountPath: /target
+            name: config
+          env:
+          - name: ARTIFACT_URL
+            value: "${artifact_url}"
+          - name: ARTIFACT_ROOT
+            value: "serials/${serial}"
       containers:
         - name: {{ .Chart.Name }}
           command: [ "dotnet" ]
@@ -55,6 +68,8 @@ spec:
               name: dev
             - mountPath: /cert
               name: cert
+            - mountPath: /config
+              name: config
           ports:
             - containerPort: 8083
               hostIP: 192.168.12.1
@@ -147,3 +162,5 @@ spec:
                 configMapKeyRef:
                   name: antares-cm
                   key: asp.env
+            - name: ANTARES_HWCONFIG_PATH
+              value: "/config"
