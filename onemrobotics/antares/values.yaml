@@ -34,6 +34,18 @@ fixdns:
     nameOverride: "fix-dns"
     fullnameOverride: ""
 
+config-loader:
+  image:
+    registry:
+    repository: 1mstaging.azurecr.io/config-loader
+    pullPolicy: Always
+    tag: "latest"
+    
+    imagePullSecrets:
+      - name: azreg
+    nameOverride: "config-loader"
+    fullnameOverride: ""
+
 controlapp:
   image:
     registry:
