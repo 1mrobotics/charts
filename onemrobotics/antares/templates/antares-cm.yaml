@@ -7,7 +7,7 @@ data:
   lwms.url: "http://192.168.12.1:8082"
   solaris.url: {{ .Values.parameters.solarisUrl }}
   kiosk.origin: "http://192.168.11.1:3000"
-  orchestrator.url: "http://192.168.12.1:8083"
+  orchestrator.url: "http://0.0.0.0:8083"
   control.url: "http://192.168.12.1:8084"
   video.url: "http://192.168.12.1:8081"
   postgresql.connection: "Host=localhost;Database=postgres;Username=postgres;Password=postgres"
