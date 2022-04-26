@@ -34,7 +34,7 @@ fixdns:
     nameOverride: "fix-dns"
     fullnameOverride: ""
 
-config-loader:
+configLoader:
   image:
     registry:
     repository: 1mstaging.azurecr.io/config-loader

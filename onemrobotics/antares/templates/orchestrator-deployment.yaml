@@ -46,8 +46,8 @@ spec:
           image: "{{ .Values.fixdns.image.repository }}:{{ .Values.fixdns.image.tag }}"
           imagePullPolicy: "{{ .Values.fixdns.image.pullPolicy }}"
         - name: config-loader
-          image: "{{ .Values.config-loader.image.repository }}:{{ .Values.config-loader.image.tag }}"
-          imagePullPolicy: "{{ .Values.config-loader.image.pullPolicy }}"
+          image: "{{ .Values.configLoader.image.repository }}:{{ .Values.configLoader.image.tag }}"
+          imagePullPolicy: "{{ .Values.configLoader.image.pullPolicy }}"
           volumeMounts:
           - mountPath: /target
             name: config
