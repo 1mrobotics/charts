@@ -45,6 +45,8 @@ configLoader:
       - name: azreg
     nameOverride: "config-loader"
     fullnameOverride: ""
+  artifact_url: ""
+  serial: ""
 
 controlapp:
   image:

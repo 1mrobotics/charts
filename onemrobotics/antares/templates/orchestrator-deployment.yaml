@@ -53,9 +53,9 @@ spec:
             name: config
           env:
           - name: ARTIFACT_URL
-            value: "${artifact_url}"
+            value: "{{ .Values.configLoader.artifact_url }}"
           - name: ARTIFACT_ROOT
-            value: "serial/${serial}"
+            value: "serial/{{ .Values.configLoader.serial }}"
       containers:
         - name: {{ .Chart.Name }}
           command: [ "dotnet" ]
