@@ -164,3 +164,8 @@ spec:
                   key: asp.env
             - name: ANTARES_HWCONFIG_PATH
               value: "/config"
+            - name: SECRET_POSTGRESQL_CONNECTION
+              valueFrom:
+                configMapKeyRef:
+                  name: antares-cm
+                  key: postgresql.connection
