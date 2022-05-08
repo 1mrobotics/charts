@@ -7,6 +7,7 @@ data:
   react.entry.method: "{{ .Values.parameters.reactEntryMethod }}"
   react.default.language: "{{ .Values.parameters.reactLanguage }}"
   react.shippingCode: "{{ .Values.parameters.reactShippingCode }}"
+  react.client: "{{ .Values.parameters.reactClient }}"
   react.appUrl: "http://192.168.11.1:8083"
   docker.image: "1mtest.azurecr.io/kiosk-os"
   docker.user: "kiosk"

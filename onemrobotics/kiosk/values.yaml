@@ -36,6 +36,7 @@ parameters:
   reactEntryMethod: "code"
   reactLanguage: "en"
   reactShippingCode: "false"
+  reactClient: ""
 
 podAnnotations: {}
 
