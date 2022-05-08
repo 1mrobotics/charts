@@ -87,6 +87,19 @@ videoapp:
   securityContext:
     privileged: true
 
+kiosklogger:
+  image:
+    registry:
+    repository: 1mstaging.azurecr.io/antares
+    pullPolicy: Always
+    tag: ""
+
+  imagePullSecrets:
+    - name: azreg
+  name: "kiosk-logger"
+  securityContext:
+    privileged: true
+    
 parameters:
   solarisUrl: ""
   env: ""

@@ -40,7 +40,7 @@ spec:
           securityContext:
             {{- toYaml .Values.videoapp.securityContext | nindent 12 }}
           image: "{{ .Values.videoapp.image.repository }}:{{ .Values.videoapp.image.tag }}"
-          imagePullPolicy: {{ .Values.controlapp.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.videoapp.image.pullPolicy }}
           env:
             - name: ENVIRONMENT_NAME
               valueFrom:

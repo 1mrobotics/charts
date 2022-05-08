@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.kiosklogger.name }}
+  labels:
+    {{- include "kiosk-logger.selectorLabels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  strategy:
+    type: Recreate  
+  selector:
+    matchLabels:
+      {{- include "kiosk-logger.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "kiosk-logger.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.kiosklogger.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      hostNetwork: true
+      containers:
+        - name: {{ .Chart.Name }}
+          command: [ "dotnet" ]
+          args: [ "KioskLogger.dll" ]
+          ports:
+            - containerPort: 9880
+              hostIP: 192.168.12.1
+              hostPort: 9880
+          securityContext:
+            {{- toYaml .Values.kiosklogger.securityContext | nindent 12 }}
+          image: "{{ .Values.kiosklogger.image.repository }}:{{ .Values.kiosklogger.image.tag }}"
+          imagePullPolicy: {{ .Values.kiosklogger.image.pullPolicy }}
+          env:
+            - name: ASPNETCORE_URLS
+              valueFrom:
+                configMapKeyRef:
+                  name: antares-cm
+                  key: kiosk.logger.url
+

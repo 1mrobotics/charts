@@ -35,3 +35,11 @@ app.kubernetes.io/name: {{ .Values.videoapp.name }}
 app.kubernetes.io/instance: {{ .Values.videoapp.name }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
+
+{{- define "kiosk-logger.selectorLabels" -}}
+helm.sh/chart: {{ include "antares.chart" . }}
+app.kubernetes.io/name: {{ .Values.kiosklogger.name }}
+app.kubernetes.io/instance: {{ .Values.kiosklogger.name }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+

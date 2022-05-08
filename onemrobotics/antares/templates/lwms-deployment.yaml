@@ -40,7 +40,7 @@ spec:
           securityContext:
             {{- toYaml .Values.lwms.securityContext | nindent 12 }}
           image: "{{ .Values.lwms.image.repository }}:{{ .Values.lwms.image.tag }}"
-          imagePullPolicy: {{ .Values.controlapp.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.lwms.image.pullPolicy }}
           env:
             - name: ENVIRONMENT_NAME
               valueFrom:

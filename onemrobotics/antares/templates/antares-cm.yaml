@@ -5,12 +5,14 @@ metadata:
   namespace: antares
 data:
   lwms.url: "http://192.168.12.1:8082"
-  solaris.url: {{ .Values.parameters.solarisUrl }}
   kiosk.origin: "http://192.168.11.1:3000"
   orchestrator.url: "http://0.0.0.0:8083"
   control.url: "http://192.168.12.1:8084"
   video.url: "http://192.168.12.1:8081"
+  solaris.url: {{ .Values.parameters.solarisUrl }}
+  kiosk.logger.url: "http://0.0.0.0:9880"
   postgresql.connection: "Host=192.168.12.1;Database=postgres;Username=postgres;Password=postgres"
+  # environment
   asp.env: "production"
   env.name: {{ .Values.parameters.env }}
   
