@@ -11,7 +11,7 @@ data:
   docker.image: "1mtest.azurecr.io/kiosk-os"
   docker.user: "kiosk"
   docker.password: "+uExAtKMj011H691pPB0mgVW5BtQY1Gg"
-  switch.mgmt.ip: "192.168.11.3"
+  switch.mgmt.ip: "192.168.12.3"
   switch.login.password: "1MR0b0tics"
     
   
