@@ -11,7 +11,7 @@ orchestrator:
     registry:
     repository: 1mstaging.azurecr.io/antares
     pullPolicy: Always
-    tag: ""
+    tag: "test"
 
   imagePullSecrets:
     - name: azreg
@@ -53,7 +53,7 @@ controlapp:
     registry:
     repository: 1mstaging.azurecr.io/antares
     pullPolicy: Always
-    tag: ""
+    tag: "test"
 
   imagePullSecrets:
     - name: azreg
@@ -66,7 +66,7 @@ lwms:
     registry:
     repository: 1mstaging.azurecr.io/antares
     pullPolicy: Always
-    tag: ""
+    tag: "test"
 
   imagePullSecrets:
     - name: azreg
@@ -79,7 +79,7 @@ videoapp:
     registry:
     repository: 1mstaging.azurecr.io/antares
     pullPolicy: Always
-    tag: ""
+    tag: "test"
 
   imagePullSecrets:
     - name: azreg
@@ -92,7 +92,7 @@ kiosklogger:
     registry:
     repository: 1mstaging.azurecr.io/antares
     pullPolicy: Always
-    tag: ""
+    tag: "test"
 
   imagePullSecrets:
     - name: azreg
