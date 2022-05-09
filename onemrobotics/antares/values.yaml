@@ -28,9 +28,6 @@ fixdns:
     repository: 1mstaging.azurecr.io/dns_fixer
     pullPolicy: Always
     tag: "latest"
-    
-    imagePullSecrets:
-      - name: azreg
     nameOverride: "fix-dns"
     fullnameOverride: ""
 
@@ -40,9 +37,6 @@ configLoader:
     repository: 1mstaging.azurecr.io/config-loader
     pullPolicy: Always
     tag: "latest"
-    
-    imagePullSecrets:
-      - name: azreg
     nameOverride: "config-loader"
     fullnameOverride: ""
   artifact_url: ""
