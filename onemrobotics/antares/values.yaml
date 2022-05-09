@@ -97,6 +97,7 @@ kiosklogger:
 parameters:
   solarisUrl: ""
   env: ""
+  antaresV1: "false"
 
 podAnnotations: {}
 

@@ -92,6 +92,11 @@ spec:
                 configMapKeyRef:
                   name: antares-cm
                   key: solaris.url
+            - name: LB_V1
+              valueFrom:
+                configMapKeyRef:
+                  name: antares-cm
+                  key: antaresV1
             - name: SECRET_EVENT_HUBS_CONNECTION
               valueFrom:
                 secretKeyRef:
