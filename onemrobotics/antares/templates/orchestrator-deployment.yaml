@@ -96,7 +96,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: antares-cm
-                  key: antaresV1
+                  key: antares.version.one
             - name: SECRET_EVENT_HUBS_CONNECTION
               valueFrom:
                 secretKeyRef:

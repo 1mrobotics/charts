@@ -15,7 +15,7 @@ data:
   # environment
   asp.env: "production"
   env.name: {{ .Values.parameters.env }}
-  antaresV1: {{ .Values.parameters.antaresV1 }}
+  antares.version.one: {{ .Values.parameters.antaresVersionOne }}
 
 
 
