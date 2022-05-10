@@ -3,6 +3,16 @@ entries:
   antares:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-05-10T02:52:47.225396499Z"
+    description: Antares Helm chart
+    digest: e544e9b0d0c925ef7c1ff3ea361edfc3d3c3d470761a4f2c3f17c5ce9b82a267
+    name: antares
+    type: application
+    urls:
+    - https://github.com/1mrobotics/charts/releases/download/antares-0.1.32/antares-0.1.32.tgz
+    version: 0.1.32
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-05-09T10:14:05.232729487Z"
     description: Antares Helm chart
     digest: 89808255127e0ef5ab5118fb88763aa78acb51aed2f2307e54a8132282a6a21c
@@ -1026,4 +1036,4 @@ entries:
     urls:
     - https://github.com/1mrobotics/charts/releases/download/rtsp-0.1.3/rtsp-0.1.3.tgz
     version: 0.1.3
-generated: "2022-05-09T10:14:05.233197286Z"
+generated: "2022-05-10T02:52:47.225753196Z"
