@@ -67,3 +67,23 @@ spec:
                 secretKeyRef:
                   name: key-vault-secret
                   key: EventHubsConnection
+            - name: AZURE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: AzureClientId
+            - name: AZURE_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: AzureClientSecret
+            - name: AZURE_SUBSCRIPTION_ID
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: AzureSubscriptionId
+            - name: AZURE_TENANT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: AzureTenantId
