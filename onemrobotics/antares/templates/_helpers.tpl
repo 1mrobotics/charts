@@ -29,10 +29,10 @@ app.kubernetes.io/instance: {{ .Values.lwms.name }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
-{{- define "video-app.selectorLabels" -}}
+{{- define "media-app.selectorLabels" -}}
 helm.sh/chart: {{ include "antares.chart" . }}
-app.kubernetes.io/name: {{ .Values.videoapp.name }}
-app.kubernetes.io/instance: {{ .Values.videoapp.name }}
+app.kubernetes.io/name: {{ .Values.mediaApp.name }}
+app.kubernetes.io/instance: {{ .Values.mediaApp.name }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 

@@ -68,7 +68,7 @@ lwms:
   securityContext:
     privileged: true
 
-videoapp:
+mediaApp:
   image:
     registry:
     repository: 1mstaging.azurecr.io/antares
@@ -77,7 +77,7 @@ videoapp:
 
   imagePullSecrets:
     - name: azreg
-  name: "video-app"
+  name: "media-app"
   securityContext:
     privileged: true
 
