@@ -57,6 +57,13 @@ spec:
                 configMapKeyRef:
                   name: kiosk-cm
                   key: react.shippingCode
+            - name: REACT_APP_CLIENT
+              valueFrom:
+                configMapKeyRef:
+                  name: kiosk-cm
+                  key: react.client
+            - name: REACT_APP_LOGGING_URL
+              value: "http://192.168.11.1:9880"
           ports:
             - containerPort: 3000
               hostIP: 192.168.11.1

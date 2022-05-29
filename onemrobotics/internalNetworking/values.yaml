@@ -16,9 +16,6 @@ internalNetworking:
   imagePullSecrets:
     - name: azreg
   name: "internal-networking"
-  securityContext:
-    capabilities:
-      add: ["NET_ADMIN"]
 
 podAnnotations: {}
 

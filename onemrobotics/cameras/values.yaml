@@ -19,6 +19,19 @@ rtsp:
   securityContext:
     privileged: true
 
+httpsProxy:
+  image:
+    registry:
+    repository: 1mstaging.azurecr.io/https-proxy
+    pullPolicy: Always
+    tag: "f22aefb-master"
+
+  imagePullSecrets:
+    - name: azreg
+  name: "https-proxy"
+  securityContext:
+    privileged: true
+    
 podAnnotations: {}
 
 podSecurityContext: {}

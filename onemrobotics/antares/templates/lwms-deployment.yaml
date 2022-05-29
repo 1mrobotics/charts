@@ -40,7 +40,7 @@ spec:
           securityContext:
             {{- toYaml .Values.lwms.securityContext | nindent 12 }}
           image: "{{ .Values.lwms.image.repository }}:{{ .Values.lwms.image.tag }}"
-          imagePullPolicy: {{ .Values.controlapp.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.lwms.image.pullPolicy }}
           env:
             - name: ENVIRONMENT_NAME
               valueFrom:
@@ -62,3 +62,28 @@ spec:
                 configMapKeyRef:
                   name: antares-cm
                   key: postgresql.connection
+            - name: SECRET_EVENT_HUBS_CONNECTION
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: EventHubsConnection
+            - name: AZURE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: AzureClientId
+            - name: AZURE_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: AzureClientSecret
+            - name: AZURE_SUBSCRIPTION_ID
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: AzureSubscriptionId
+            - name: AZURE_TENANT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: AzureTenantId

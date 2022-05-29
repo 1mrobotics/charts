@@ -7,11 +7,12 @@ data:
   react.entry.method: "{{ .Values.parameters.reactEntryMethod }}"
   react.default.language: "{{ .Values.parameters.reactLanguage }}"
   react.shippingCode: "{{ .Values.parameters.reactShippingCode }}"
+  react.client: "{{ .Values.parameters.reactClient }}"
   react.appUrl: "http://192.168.11.1:8083"
   docker.image: "1mtest.azurecr.io/kiosk-os"
   docker.user: "kiosk"
   docker.password: "+uExAtKMj011H691pPB0mgVW5BtQY1Gg"
-  switch.mgmt.ip: "192.168.11.3"
+  switch.mgmt.ip: "192.168.12.3"
   switch.login.password: "1MR0b0tics"
     
   

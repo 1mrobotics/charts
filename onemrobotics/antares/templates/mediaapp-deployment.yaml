@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.videoapp.name }}
+  name: {{ .Values.mediaApp.name }}
   labels:
-    {{- include "video-app.selectorLabels" . | nindent 4 }}
+    {{- include "media-app.selectorLabels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
@@ -12,7 +12,7 @@ spec:
     type: Recreate  
   selector:
     matchLabels:
-      {{- include "video-app.selectorLabels" . | nindent 6 }}
+      {{- include "media-app.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -20,27 +20,35 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "video-app.selectorLabels" . | nindent 8 }}
+        {{- include "media-app.selectorLabels" . | nindent 8 }}
     spec:
-      {{- with .Values.videoapp.imagePullSecrets }}
+      {{- with .Values.mediaApp.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       hostNetwork: true
+      volumes:
+        - name: storage
+          hostPath:
+            path: /home/onemrobotics/storage
+            type: DirectoryOrCreate
       containers:
         - name: {{ .Chart.Name }}
           command: [ "dotnet" ]
-          args: [ "VideoApp.dll" ]
+          args: [ "MediaApp.dll" ]
+          volumeMounts:
+            - mountPath: /storage
+              name: storage
           ports:
             - containerPort: 8081
               hostIP: 192.168.12.1
               hostPort: 8081
           securityContext:
-            {{- toYaml .Values.videoapp.securityContext | nindent 12 }}
-          image: "{{ .Values.videoapp.image.repository }}:{{ .Values.videoapp.image.tag }}"
-          imagePullPolicy: {{ .Values.controlapp.image.pullPolicy }}
+            {{- toYaml .Values.mediaApp.securityContext | nindent 12 }}
+          image: "{{ .Values.mediaApp.image.repository }}:{{ .Values.mediaApp.image.tag }}"
+          imagePullPolicy: {{ .Values.mediaApp.image.pullPolicy }}
           env:
             - name: ENVIRONMENT_NAME
               valueFrom:
@@ -57,4 +65,9 @@ spec:
                 configMapKeyRef:
                   name: antares-cm
                   key: video.url
+            - name: SECRET_BLOB_STORAGE_CONNECTION
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: BlobStorageConnection
 

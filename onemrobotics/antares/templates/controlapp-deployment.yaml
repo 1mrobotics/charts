@@ -9,7 +9,7 @@ spec:
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   strategy:
-    type: Recreate  
+    type: Recreate
   selector:
     matchLabels:
       {{- include "control-app.selectorLabels" . | nindent 6 }}
@@ -48,10 +48,7 @@ spec:
                   name: antares-cm
                   key: control.url
             - name: ORCHESTRATOR_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: antares-cm
-                  key: orchestrator.url
+              value: http://192.168.12.1:8083
             - name: ENVIRONMENT_NAME
               valueFrom:
                 configMapKeyRef:

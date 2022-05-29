@@ -11,7 +11,7 @@ orchestrator:
     registry:
     repository: 1mstaging.azurecr.io/antares
     pullPolicy: Always
-    tag: ""
+    tag: "test"
 
   imagePullSecrets:
     - name: azreg
@@ -28,18 +28,26 @@ fixdns:
     repository: 1mstaging.azurecr.io/dns_fixer
     pullPolicy: Always
     tag: "latest"
-    
-    imagePullSecrets:
-      - name: azreg
     nameOverride: "fix-dns"
     fullnameOverride: ""
+
+configLoader:
+  image:
+    registry:
+    repository: 1mstaging.azurecr.io/config-loader
+    pullPolicy: Always
+    tag: "latest"
+    nameOverride: "config-loader"
+    fullnameOverride: ""
+  artifact_url: ""
+  serial: ""
 
 controlapp:
   image:
     registry:
     repository: 1mstaging.azurecr.io/antares
     pullPolicy: Always
-    tag: ""
+    tag: "test"
 
   imagePullSecrets:
     - name: azreg
@@ -52,7 +60,7 @@ lwms:
     registry:
     repository: 1mstaging.azurecr.io/antares
     pullPolicy: Always
-    tag: ""
+    tag: "test"
 
   imagePullSecrets:
     - name: azreg
@@ -60,22 +68,36 @@ lwms:
   securityContext:
     privileged: true
 
-videoapp:
+mediaApp:
   image:
     registry:
     repository: 1mstaging.azurecr.io/antares
     pullPolicy: Always
-    tag: ""
+    tag: "test"
 
   imagePullSecrets:
     - name: azreg
-  name: "video-app"
+  name: "media-app"
   securityContext:
     privileged: true
 
+kiosklogger:
+  image:
+    registry:
+    repository: 1mstaging.azurecr.io/antares
+    pullPolicy: Always
+    tag: "test"
+
+  imagePullSecrets:
+    - name: azreg
+  name: "kiosk-logger"
+  securityContext:
+    privileged: true
+    
 parameters:
   solarisUrl: ""
   env: ""
+  antaresVersionOne: "false"
 
 podAnnotations: {}
 

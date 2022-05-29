@@ -1,0 +1,39 @@
+modules:
+    # Module name, needs to be passed as parameter by Prometheus.
+  - name: "satec"
+    protocol: 'tcp/ip'
+    metrics:
+        # Name of the metric.
+      - name: "ip_addr"
+        # Help text of the metric.
+        help: "represents the overall power consumption by phase"
+        # Labels to be added to the time series.
+        labels:
+          phase: "1"
+        # Register address.
+        address: 322
+        # Datatypes allowed: bool, int16, uint16, float16, float32
+        dataType: uint16
+        # Endianness allowed: big, little, mixed, yolo
+        # Optional. If not defined: big.
+        endianness: big
+        # Prometheus metric type: https://prometheus.io/docs/concepts/metric_types/.
+        metricType: counter
+        # Factor can be specified to represent metric value.
+        # Examples: 1, 2, 1.543 etc
+        # Optional.
+        factor: 3.1415926535
+
+      - name: "some_gauge"
+        help: "some help for some gauge"
+        address: 30023
+        dataType: int16
+        metricType: gauge
+        factor: 2
+
+      - name: "coil"
+        help: "some help for some coil"
+        address: 124
+        dataType: bool
+        bitOffset: 0
+        metricType: gauge

@@ -34,19 +34,28 @@ spec:
           hostPath:
             path: /dev
             type: Directory
-        - name: pcscd-comm
-          hostPath:
-            path: /run/pcscd
-            type: Directory
         - name: cert
           hostPath:
-            path: /home/onemrobotics/cert
+            path: /cert
             type: DirectoryOrCreate
+        - name: config
+          emptyDir: {}
       terminationGracePeriodSeconds: 61
       initContainers:
         - name: fix-dns
           image: "{{ .Values.fixdns.image.repository }}:{{ .Values.fixdns.image.tag }}"
           imagePullPolicy: "{{ .Values.fixdns.image.pullPolicy }}"
+        - name: config-loader
+          image: "{{ .Values.configLoader.image.repository }}:{{ .Values.configLoader.image.tag }}"
+          imagePullPolicy: "{{ .Values.configLoader.image.pullPolicy }}"
+          volumeMounts:
+          - mountPath: /target
+            name: config
+          env:
+          - name: ARTIFACT_URL
+            value: "{{ .Values.configLoader.artifact_url }}"
+          - name: ARTIFACT_ROOT
+            value: "serial/{{ .Values.configLoader.serial }}"
       containers:
         - name: {{ .Chart.Name }}
           command: [ "dotnet" ]
@@ -55,12 +64,12 @@ spec:
             {{- toYaml .Values.orchestrator.securityContext | nindent 12 }}
           image: "{{ .Values.orchestrator.image.repository }}:{{ .Values.orchestrator.image.tag }}"
           volumeMounts:
-            - mountPath: /run/pcscd
-              name: pcscd-comm
             - mountPath: /dev
               name: dev
             - mountPath: /cert
               name: cert
+            - mountPath: /config
+              name: config
           ports:
             - containerPort: 8083
               hostIP: 192.168.12.1
@@ -83,6 +92,11 @@ spec:
                 configMapKeyRef:
                   name: antares-cm
                   key: solaris.url
+            - name: LB_V1
+              valueFrom:
+                configMapKeyRef:
+                  name: antares-cm
+                  key: antares.version.one
             - name: SECRET_EVENT_HUBS_CONNECTION
               valueFrom:
                 secretKeyRef:
@@ -153,3 +167,10 @@ spec:
                 configMapKeyRef:
                   name: antares-cm
                   key: asp.env
+            - name: ANTARES_HWCONFIG_PATH
+              value: "/config"
+            - name: SECRET_POSTGRESQL_CONNECTION
+              valueFrom:
+                configMapKeyRef:
+                  name: antares-cm
+                  key: postgresql.connection
