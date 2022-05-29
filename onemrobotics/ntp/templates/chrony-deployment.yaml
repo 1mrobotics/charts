@@ -38,7 +38,8 @@ spec:
         - name: ntp
           containerPort: 123
           protocol: UDP
-        command: [ "/usr/sbin/chronyd", "-d", "-f", "/home/chrony.conf" ]
+        command: ["/usr/sbin/chronyd"]
+        args: ["-d", "-f", "/home/chrony.conf"]
         securityContext:
           capabilities:
             add: ["SYS_TIME"]
