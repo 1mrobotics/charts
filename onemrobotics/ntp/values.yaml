@@ -7,3 +7,5 @@ ntp:
   imagePullSecrets:
     - name: azreg
   name: "ntp"
+  
+podAnnotations: {}
