@@ -1,0 +1,11 @@
+ntp:
+  image:
+    registry:
+    repository: 1mproduction.azurecr.io/chrony
+    pullPolicy: Always
+    tag: "latest"
+  imagePullSecrets:
+    - name: azreg
+  name: "ntp"
+  
+podAnnotations: {}

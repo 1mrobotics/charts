@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.ntp.name }}
+  labels:
+    {{- include "ntp.selectorLabels" . | nindent 4 }}
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      {{- include "ntp.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "ntp.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.ntp.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      hostNetwork: true
+      containers:
+      - name: chronyd
+        image: "{{ .Values.ntp.image.repository }}:{{ .Values.ntp.image.tag }}"
+        imagePullPolicy: {{ .Values.ntp.image.pullPolicy }}
+        volumeMounts:          
+          - name: chrony-config-volume
+            mountPath: /home
+        env:
+        - name: ALLOW_CIDR
+          value: 0.0.0.0/0
+        ports:
+        - name: ntp
+          containerPort: 123
+          protocol: UDP
+        command: [ "/usr/sbin/chronyd", "-d", "-f", "/home/chrony.conf" ]
+        securityContext:
+          capabilities:
+            add: ["SYS_TIME"]
+      volumes:
+      - name: chrony-config-volume
+        configMap:
+          name: chrony-config-cm  
