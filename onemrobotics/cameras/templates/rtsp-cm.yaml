@@ -20,3 +20,15 @@ data:
         source: rtsp://admin:1MRobotics@camera-back/Streaming/Channels/102
       front-low:
         source: rtsp://admin:1MRobotics@camera-front/Streaming/Channels/102
+      lift:
+        source: rtsp://admin:1MRobotics@camera-lift/Streaming/Channels/101
+        runOnReady: ffmpeg -i rtsp://localhost:8554/lift -c copy -f segment -strftime 1 -segment_time 60 -segment_format mp4 /storage/lift/%Y-%m-%d_%H-%M-%S.mp4
+        runOnReadyRestart: yes
+      kiosk:
+        source: rtsp://admin:1MRobotics@camera-kiosk/Streaming/Channels/101
+        runOnReady: ffmpeg -i rtsp://localhost:8554/kiosk -c copy -f segment -strftime 1 -segment_time 60 -segment_format mp4 /storage/kiosk/%Y-%m-%d_%H-%M-%S.mp4
+        runOnReadyRestart: yes
+      lift-low:
+        source: rtsp://admin:1MRobotics@camera-lift/Streaming/Channels/102
+      kiosk-low:
+        source: rtsp://admin:1MRobotics@camera-kiosk/Streaming/Channels/102
