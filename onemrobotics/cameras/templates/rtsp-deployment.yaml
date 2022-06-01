@@ -32,7 +32,7 @@ spec:
       volumes:
         - name: storage
           hostPath:
-            path: /home/onemrobotics/storage
+            path: /storage
             type: DirectoryOrCreate
         - name: config
           configMap:
