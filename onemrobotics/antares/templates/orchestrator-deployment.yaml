@@ -169,10 +169,8 @@ spec:
                   key: asp.env
             - name: ANTARES_HWCONFIG_PATH
               value: "/config"
-            - name: PYTHONIOENCODING
-              value: utf8
-            - name: PYTHONUTF8
-              value: "1"
+            - name: LC_ALL
+              value: C.UTF-8
             - name: SECRET_POSTGRESQL_CONNECTION
               valueFrom:
                 configMapKeyRef:
