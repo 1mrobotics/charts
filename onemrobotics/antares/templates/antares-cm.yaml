@@ -16,7 +16,7 @@ data:
   asp.env: "production"
   env.name: "{{ .Values.parameters.env }}"
   antares.version.one: "{{ .Values.parameters.antaresVersionOne }}"
-
+  antares.two.sides: "{{ .Values.parameters.twoSides }}"
 
 
   

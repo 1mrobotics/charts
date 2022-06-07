@@ -98,6 +98,7 @@ parameters:
   solarisUrl: ""
   env: ""
   antaresVersionOne: "false"
+  twoSides: "false"
 
 podAnnotations: {}
 

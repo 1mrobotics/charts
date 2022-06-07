@@ -176,3 +176,8 @@ spec:
                 configMapKeyRef:
                   name: antares-cm
                   key: postgresql.connection
+            - name: TWO_STOCK_SIDES
+              valueFrom:
+                configMapKeyRef:
+                  name: antares-cm
+                  key: antares.two.sides
