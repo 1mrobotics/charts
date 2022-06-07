@@ -29,6 +29,11 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       hostNetwork: true
+      volumes:
+        - name: cert
+          hostPath:
+            path: /cert
+            type: DirectoryOrCreate
       containers:
         - name: {{ .Chart.Name }}
           command: [ "dotnet" ]
@@ -41,6 +46,9 @@ spec:
             {{- toYaml .Values.lwms.securityContext | nindent 12 }}
           image: "{{ .Values.lwms.image.repository }}:{{ .Values.lwms.image.tag }}"
           imagePullPolicy: {{ .Values.lwms.image.pullPolicy }}
+          volumeMounts:
+            - mountPath: /cert
+              name: cert
           env:
             - name: ENVIRONMENT_NAME
               valueFrom:
@@ -87,3 +95,18 @@ spec:
                 secretKeyRef:
                   name: key-vault-secret
                   key: AzureTenantId
+            - name: SOLARIS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: antares-cm
+                  key: solaris.url
+            - name: SECRET_AUTH0_INTERNAL_API_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: Auth0InternalApiClientId
+            - name: SECRET_AUTH0_INTERNAL_API_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: key-vault-secret
+                  key: Auth0InternalApiClientSecret
