@@ -171,6 +171,8 @@ spec:
               value: "/config"
             - name: PYTHONIOENCODING
               value: utf8
+            - name: PYTHONUTF8
+              value: 1
             - name: SECRET_POSTGRESQL_CONNECTION
               valueFrom:
                 configMapKeyRef:
