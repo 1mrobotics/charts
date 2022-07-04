@@ -32,3 +32,16 @@ data:
         source: rtsp://admin:1MRobotics@camera-lift/Streaming/Channels/102
       kiosk-low:
         source: rtsp://admin:1MRobotics@camera-kiosk/Streaming/Channels/102
+      outdoor-1:
+        source: rtsp://admin:1MRobotics@outdoor-1/Streaming/Channels/101
+        runOnReady: ffmpeg -i rtsp://localhost:8554/outdoor-1 -c copy -f segment -strftime 1 -segment_time 60 -segment_format mp4 /storage/outdoor-1/%Y-%m-%d_%H-%M-%S.mp4
+        runOnReadyRestart: yes
+      outdoor-1-low:
+        source: rtsp://admin:1MRobotics@outdoor-1/Streaming/Channels/102
+      outdoor-2:
+        source: rtsp://admin:1MRobotics@outdoor-2/Streaming/Channels/101
+        runOnReady: ffmpeg -i rtsp://localhost:8554/outdoor-2 -c copy -f segment -strftime 1 -segment_time 60 -segment_format mp4 /storage/outdoor-2/%Y-%m-%d_%H-%M-%S.mp4
+        runOnReadyRestart: yes
+      outdoor-2-low:
+        source: rtsp://admin:1MRobotics@outdoor-2/Streaming/Channels/102
+        
