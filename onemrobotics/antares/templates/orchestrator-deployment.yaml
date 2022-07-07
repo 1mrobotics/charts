@@ -6,7 +6,7 @@ metadata:
     {{- include "orchestrator.selectorLabels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.orchestrator.replicaCount }}
   {{- end }}
   strategy:
     type: Recreate  

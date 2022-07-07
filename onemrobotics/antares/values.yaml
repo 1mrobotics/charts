@@ -21,6 +21,7 @@ orchestrator:
       nvidia.com/gpu: 1 # requesting 1 GPU
   securityContext:
     privileged: true
+  replicaCount: 1
 
 fixdns:
   image:
