@@ -22,6 +22,7 @@ orchestrator:
   securityContext:
     privileged: true
   replicaCount: 1
+  terminationGracePeriod: 1800 # up to 30 minutes
 
 fixdns:
   image:
