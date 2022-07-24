@@ -43,7 +43,7 @@ spec:
         - name: local-share
           persistentVolumeClaim:
             claimName: local-share
-      terminationGracePeriodSeconds: 61
+      terminationGracePeriodSeconds: {{ .Values.orchestrator.terminationGracePeriod }}
       initContainers:
         - name: fix-dns
           image: "{{ .Values.fixdns.image.repository }}:{{ .Values.fixdns.image.tag }}"
